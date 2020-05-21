@@ -18,9 +18,6 @@ $(brew --prefix)/opt/fzf/install
 # restore terminal settings
 open Sauce.terminal
 
-# restore cron jobs
-crontab .cronjobs
-
 # install vim plugins
 vim
 
