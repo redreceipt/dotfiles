@@ -1,0 +1,43 @@
+[user]
+	email = micneeley14@gmail.com
+	name = Michael Neeley
+[alias]
+	co = checkout
+	wipe = checkout .
+	new = checkout -b
+	s = status -s
+	b = branch
+	d = diff --compact-summary
+	cam = commit -am
+	l = log -10 --oneline --decorate --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	wipe = clean -fd
+	publish = "!git push -u origin $(git branch-name)"
+	undo = reset HEAD~1
+	erase = branch -D
+	unstage = restore --staged .
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+
+	# hub aliases
+	test = pr checkout
+	submit = pull-request -p
+[apply]
+	whitespace = nowarn
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[github]
+	user = redreceipt
