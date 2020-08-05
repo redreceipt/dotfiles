@@ -41,9 +41,13 @@ alias cat=bat
 alias weather='curl wttr.in'
 alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | sed -E "s/.*inet ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*/\1/g"'
 
-# todo.txt
-export TODOTXT_DEFAULT_ACTION=ls
-alias t='/usr/local/bin/todo.sh -d ~/.todo.cfg'
+# brew autocomplete
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
 # z
 . /usr/local/etc/profile.d/z.sh

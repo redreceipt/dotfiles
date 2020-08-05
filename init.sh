@@ -30,9 +30,19 @@ echo "Hide Scrollbar. System Preferences > General > Show scroll bars > When scr
 echo "Invert Scroll. System Preferences > Trackpad > Scroll & Zoom > Natural (OFF)"
 
 # SSH Key
+echo "\nSSH Keys"
+echo "##################"
 ssh-keygen -t rsa -b 4096 -C "micneeley14@gmail.com"
 echo "Host *
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
 ssh-add -K ~/.ssh/id_rsa
+pbcopy < ~/.ssh/id_rsa.pub
+echo "Public key has been copied into your clipboard"
+
+# Misc
+echo "\nOther stuff"
+echo "##################"
+echo "Homebrew has a bug..."
+brew cask install adoptopenjdk/openjdk/adoptopenjdk8

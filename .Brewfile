@@ -37,7 +37,7 @@ brew "yarn"
 brew "z"
 brew "heroku/brew/heroku"
 brew "wix/brew/applesimutils"
-cask "adoptopenjdk/openjdk/adoptopenjdk8"
+cask "adoptopenjdk8"
 cask "android-platform-tools"
 cask "android-sdk"
 cask "android-studio"
@@ -46,6 +46,7 @@ cask "clipy"
 cask "disk-drill"
 cask "dropbox"
 cask "figma"
+cask "font-sauce-code-pro-nerd-font"
 cask "gimp"
 cask "graphql-playground"
 cask "kap"
@@ -60,4 +61,6 @@ cask "spotify"
 cask "vlc"
 mas "Countdowns", id: 926707738
 mas "Drafts", id: 1435957248
+mas "GarageBand", id: 682658836
 mas "Grammarly for Safari", id: 1462114288
+mas "Xcode", id: 497799835
