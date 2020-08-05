@@ -1,3 +1,4 @@
+tap "adoptopenjdk/openjdk"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -12,8 +13,6 @@ brew "bat"
 brew "fd"
 brew "fzf"
 brew "gist"
-brew "git"
-brew "gnupg"
 brew "go"
 brew "htop"
 brew "hub"
@@ -22,6 +21,7 @@ brew "jsonlint"
 brew "mas"
 brew "now-cli"
 brew "pandoc"
+brew "postgresql", restart_service: true
 brew "prettier"
 brew "rbenv"
 brew "redis", restart_service: true
@@ -38,34 +38,34 @@ brew "yarn"
 brew "z"
 brew "heroku/brew/heroku"
 brew "wix/brew/applesimutils"
+cask "adoptopenjdk8"
 cask "android-messages"
 cask "android-platform-tools"
 cask "android-sdk"
 cask "android-studio"
 cask "appcleaner"
+cask "azure-data-studio"
 cask "clipy"
-cask "discord"
+cask "disk-drill"
 cask "dropbox"
 cask "figma"
-cask "font-saucecodepro-nerd-font"
 cask "gimp"
-cask "google-chrome"
 cask "graphql-playground"
 cask "kap"
-cask "keybase"
 cask "kindle"
 cask "lastpass"
 cask "ngrok"
 cask "popsql"
+cask "quik"
 cask "react-native-debugger"
-cask "rocket-chat"
 cask "slack"
 cask "spotify"
 cask "tor-browser"
-cask "wrike"
+cask "virtualbox"
+cask "vlc"
+mas "1Password 7", id: 1333542190
 mas "Countdowns", id: 926707738
-mas "iA Writer", id: 775737590
-mas "Knights of the Old Republic", id: 416608891
+mas "Drafts", id: 1435957248
+mas "Grammarly for Safari", id: 1462114288
+mas "iMovie", id: 408981434
 mas "MindNode", id: 1289197285
-mas "RollerCoaster Tycoon 3 Platinum", id: 549294099
-mas "Xcode", id: 497799835
