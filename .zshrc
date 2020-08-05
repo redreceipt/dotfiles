@@ -39,6 +39,7 @@ alias ll='ls -lah'
 alias git=hub
 alias cat=bat
 alias weather='curl wttr.in'
+alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | sed -E "s/.*inet ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+).*/\1/g"'
 
 # todo.txt
 export TODOTXT_DEFAULT_ACTION=ls

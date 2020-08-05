@@ -57,9 +57,9 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
 Plug 'dense-analysis/ale'
-"Plug 'mattn/emmet-vim'
-"Plug '/usr/local/opt/fzf'
-"Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'itchyny/lightline.vim'
@@ -169,11 +169,11 @@ nmap <leader>md <C-p>
 
 
 " fzf
-"set rtp+=/usr/local/opt/fzf
-"nnoremap ; :Files<CR>
-"nnoremap <leader>f :Rg<CR>
-"nnoremap <Leader>b :Buffers<CR>
-"nnoremap <Leader>h :History<CR>
+set rtp+=/usr/local/opt/fzf
+nnoremap ; :Files<CR>
+nnoremap <leader>f :Rg<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>h :History<CR>
 
 " gruvbox color scheme
 let g:gruvbox_vert_split='bg1'
