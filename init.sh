@@ -22,6 +22,17 @@ open Sauce.terminal
 vim
 
 # configure some other mac prefs
+echo "\nMac Preferences"
+echo "##################"
 echo "Set Terminal Settings as default. Terminal > Shell > Use Settings as Default"
 echo "Hide Terminal Brackets. Terminal > Edit > Marks > Automatically Mark Prompt Lines (OFF)"
 echo "Hide Scrollbar. System Preferences > General > Show scroll bars > When scrolling"
+echo "Invert Scroll. System Preferences > Trackpad > Scroll & Zoom > Natural (OFF)"
+
+# SSH Key
+ssh-keygen -t rsa -b 4096 -C "micneeley14@gmail.com"
+echo "Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+ssh-add -K ~/.ssh/id_rsa
