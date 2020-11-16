@@ -3,8 +3,8 @@
 	name = Michael Neeley
 [alias]
 	co = checkout
-	wipe = checkout .
 	new = checkout -b
+	unmerge = checkout -m
 	s = status -s
 	b = branch
 	d = diff --compact-summary
@@ -17,9 +17,22 @@
 	unstage = restore --staged .
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 
+	# github CLI
+	prs = "!gh pr status"
+	test = "!gh pr checkout"
+	approve = "!gh pr review -a"
+	merge = "!gh pr merge"
+	submit = "!gh pr create"
+	view = "!gh pr view --web"
+
 	# hub aliases
-	test = pr checkout
-	submit = pull-request -p
+	;test = pr checkout
+	;submit = pull-request -p
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
 [apply]
 	whitespace = nowarn
 [color]
@@ -41,3 +54,8 @@
 	untracked = cyan
 [github]
 	user = redreceipt
+; necessary sometimes to authenticate to github
+;[url "git@github.com:"]
+	;insteadOf = https://github.com/
+[core]
+	ignorecase = false

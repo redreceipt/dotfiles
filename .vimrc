@@ -20,8 +20,9 @@ set nowrap " won't wrap the text
 set formatoptions=tqn1 " see :h fo-table
 set tabstop=4 " tab are 4 spaces
 set shiftwidth=4 " indent with > and < by 4 spaces
-set softtabstop=4 " not really sure???
-"set expandtab " makes tabs spaces
+"set softtabstop=4 " not really sure???
+set smarttab " insert tabs on the shiftwidth, not tabstop
+set expandtab " makes tabs spaces
 set autoread " automatically reload files changed outside of Vim
 set ttyfast " makes keyboard commands faster
 set nobackup " don't use these
@@ -32,7 +33,6 @@ set copyindent " copy the previous indentation on autoindent
 set showmatch " set show matching parens
 set ignorecase " ignore case when searching
 set smartcase " only ignore case if search is all lowercase
-set smarttab " insert tabs on the shiftwidth, not tabstop
 set hlsearch " highlight search results
 set incsearch " show search matches as you type
 set gdefault " you omit g in find+replace (:%s/foo/bar)
@@ -43,6 +43,11 @@ set backspace=indent,eol,start " make backspace work like most other programs
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 set list " shows hidden characters
 set matchpairs+=<:> " set match pairs use % to jump between pairs
+
+" git mergetool
+nmap <leader>dl :diffget LOCAL<CR>
+nmap <leader>db :diffget BASE<CR>
+nmap <leader>dr :diffget REMOTE<CR>
 
 " Vim Plug installation and plugin management settings
 " PlugInstall: install plugins
@@ -55,11 +60,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
+"Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --all' }
 Plug 'dense-analysis/ale'
 Plug 'mattn/emmet-vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'morhetz/gruvbox'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'itchyny/lightline.vim'
@@ -71,13 +77,16 @@ Plug 'ap/vim-css-color'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'mitsuhiko/vim-jinja'
 "Plug 'Glench/Vim-Jinja2-Syntax'
+"Plug 'pangloss/vim-javascript'
 call plug#end()
 
 " disable django files
@@ -94,18 +103,20 @@ nnoremap k gk
 
 " create a vertical split and switch over to it
 nnoremap <leader>vv <C-w>v<C-w>l
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
+" go to next window
+nnoremap <leader><Tab> <C-w>w
+"noremap <C-j> <C-w>j
+"noremap <C-k> <C-w>k
+"noremap <C-l> <C-w>l
+"noremap <C-h> <C-w>h
 
 " Move lines up and down
-"nnoremap <C-j> :m .+1<CR>==
-"nnoremap <C-k> :m .-2<CR>==
-"inoremap <C-j> <Esc>:m .+1<CR>==gi
-"inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
@@ -140,13 +151,15 @@ nnoremap <silent> <leader>sh :terminal<CR>
 
 " ALE settings
 let g:ale_fixers = {
-\   'javascript': ['eslint'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescriptreact': ['prettier', 'eslint'],
 \   'html': ['prettier'],
 \   'json': ['prettier'],
 \   'css': ['prettier'],
 \   'yml': ['prettier'],
 \   'markdown': ['prettier'],
-\   'python': ['yapf', 'isort'],
+\   'python': ['black', 'isort'],
+\   'sh': ['shfmt'],
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 
@@ -161,7 +174,7 @@ let g:ale_lint_on_text_changed = 'always'  " never/insert/normal/always
 
 " Vim Markdown Preview Settings
 let vim_markdown_preview_toggle=0 " previews on <C-p>, set to 3 for auto on sove
-let vim_markdown_preview_browser='Google Chrome'
+"let vim_markdown_preview_browser='Google Chrome'
 let vim_markdown_preview_temp_file=1
 "let vim_markdown_preview_github= 1
 let vim_markdown_preview_pandoc=1
@@ -267,6 +280,21 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 " vim-fugitive
 nmap <leader>gb :Gblame<CR>
+nmap <leader>gv :GBrowse<CR>
+
+" prose mode
+function! ProseMode()
+  call goyo#execute(0, [])
+  set spell noci nosi noai nolist noshowmode noshowcmd
+  set complete+=s
+  set bg=light
+  "if !has('gui_running')
+    "let g:solarized_termcolors=256
+  "endif
+endfunction
+
+command! ProseMode call ProseMode()
+nmap <Leader>p :ProseMode<CR>
 
 "TODO: add EditorConfig plugin if want to sync various code style prefs across
 "editors

@@ -33,7 +33,6 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 function gi() { curl -L -s https://www.gitignore.io/api/$* ;}
 
 # aliases
-alias slack='slack-cli'
 alias ls='ls -G'
 alias ll='ls -lah'
 alias git=hub
@@ -52,41 +51,6 @@ fi
 # z
 . /usr/local/etc/profile.d/z.sh
 
-# transfer.sh
-# same as curl --upload-file ./hello.txt https://transfer.sh/hello.txt
-transfer() {
-  if [ $# -eq 0 ];
-  then echo -e "No arguments specified. Usage:\\ntransfer file.md";
-    return 1;
-  fi
-  tmpfile=$( mktemp -t transferXXX );
-  if tty -s;
-  then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
-    curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> "$tmpfile";
-  else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> "$tmpfile" ;
-  fi
-  cat "$tmpfile";
-  rm -f "$tmpfile";
-}
-
-# file.io
-# same as curl -F "file=@test.txt" https://file.io
-share() {
-  if [ $# -eq 0 ];
-  then echo -e "No arguments specified. Usage:\\nshare file.md";
-    return 1;
-  fi
-  curl -F "file=@$1" https://file.io
-}
-# same as curl -F "text=this is some text" https://file.io
-sharetext() {
-  if [ $# -eq 0 ];
-  then echo -e "No arguments specified. Usage:\\nshare \"some text\"";
-    return 1;
-  fi
-  curl -F "text=$1" https://file.io
-}
-
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
@@ -100,22 +64,10 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#autoload -U add-zsh-hook
-#load-nvmrc() {
-  #if [[ -f .nvmrc && -r .nvmrc ]]; then
-    #nvm use
-  #elif [[ $(nvm version) != $(nvm version default)  ]]; then
-    #echo "Reverting to nvm default version"
-    #nvm use default
-  #fi
-#}
-#add-zsh-hook chpwd load-nvmrc
-#load-nvmrc
+ #nvm
+#export NVM_DIR="$HOME/.nvm"
+  #[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"   This loads nvm
+  #[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"   This loads nvm bash_completion
 
 # rbenv
 eval "$(rbenv init -)"
