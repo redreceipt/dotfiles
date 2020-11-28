@@ -1,7 +1,7 @@
 #! /bin/zsh
 
 # install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # softlink dotfiles
 ln -sf ~/Dropbox/dotfiles/.vimrc ~/.vimrc
