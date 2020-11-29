@@ -44,6 +44,11 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 set list " shows hidden characters
 set matchpairs+=<:> " set match pairs use % to jump between pairs
 
+" spellcheck
+set spelllang=en
+set spellfile=$HOME/Dropbox/dotfiles/vim/spell/en.utf-8.add
+"set spell
+
 " git mergetool
 nmap <leader>dl :diffget LOCAL<CR>
 nmap <leader>db :diffget BASE<CR>
@@ -63,7 +68,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --all' }
 Plug 'dense-analysis/ale'
 Plug 'mattn/emmet-vim'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'morhetz/gruvbox'
@@ -92,7 +97,9 @@ call plug#end()
 " disable django files
 "let g:polyglot_disabled = ['jinja']
 
+" file type settings
 autocmd filetype text,markdown,pullrequest set wrap
+autocmd filetype text,markdown,pullrequest set spell
 
 " this will clear the highlighted searches
 nmap <silent> <leader>/ :nohlsearch<CR>
@@ -165,7 +172,7 @@ let g:ale_fixers = {
 
 let g:ale_enabled = 1
 let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 0 " only use linters I've defined here
 let g:ale_echo_msg_format = '%linter%: %s'
 let g:ale_lint_on_text_changed = 'always'  " never/insert/normal/always
